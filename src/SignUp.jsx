@@ -3,22 +3,22 @@ import { Link } from 'react-router-dom';
 // import { FaUser } from "react-icons/fa";
 import Instance from "./AxiosConfig";
 import { useNavigate } from 'react-router-dom';
-
+import Login from './Login';
 function SignUp() {
     const navigate = useNavigate()
-    const [FormData, setFormData] = useState({
+    const [formData, setFormData] = useState({
         first_name: "",
         last_name: "",
         email_id: "",
         user_password: "",
     });
-    function handleOnChange() {
-
+    function handleOnChange(e) {
+        setFormData({ ...formData, [e.target.name]: e.target.value });
     }
     async function handleSubmit(e) {
         e.preventDefault();
         try {
-            const response = Instance.post("/auth/register", { FormData });
+            const response = Instance.post("/auth/register", { formData });
             if (response.staus === 201) {
                 console.log("Registration Successful")
                 navigate("/login");
@@ -29,17 +29,17 @@ function SignUp() {
     }
 
     return (
-        <div>
-
-            <div>
-
-                <form onClick={handleSubmit}>
+       
+        <div><div className="login-container">
+            <h2>Bill Splitter</h2>
+            <p>Split your bills easily</p>
+            <form onClick={handleSubmit}>
 
                     <input
                         type="text"
                         name="fname"
                         id="first_name"
-                        value={FormData.first_name}
+                        value={formData.first_name}
                         placeholder="First Name"
                         onChange={handleOnChange}
                     ></input>
@@ -48,7 +48,7 @@ function SignUp() {
                         type="text"
                         name="lname"
                         id="last_name"
-                        value={FormData.last}
+                        value={formData.last_name}
                         placeholder="Last Name"
                         onChange={handleOnChange}
                     ></input>
@@ -57,7 +57,7 @@ function SignUp() {
                         type="email"
                         name="email"
                         id="email_id"
-                        value={FormData.email}
+                        value={formData.email_id}
                         placeholder="Email"
                         onChange={handleOnChange}
                     ></input>
@@ -66,15 +66,16 @@ function SignUp() {
                         type="password"
                         name=" password"
                         id="user_password"
-                        value={FormData.user_password}
+                        value={formData.user_password}
                         placeholder="Password"
                         onChange={handleOnChange}
                     ></input>
 
-                    <button type="submit" value="Register"
+                    <button type="Sign In" value="Register"
                     ></button>
 
                 </form>
+            <p>Already have an account? <Link to="/Login">Login In</Link></p>
             </div>
         </div>
     )

@@ -1,8 +1,8 @@
 import axios from "axios";
 // axios->middleware for interaction between frontend and backend
 
-const Instance=axios.create({
-    baseURL:"https://inventory-management-8mn8.onrender.com",
-
+const Instance = axios.create({
+    baseURL:"https://inventory-management-i3zd.onrender.com",
+    withCredentials:true,
 })
 export default Instance;
